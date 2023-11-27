@@ -1,11 +1,19 @@
 #pragma once
 
 #include <cstdint>
-#include <array>
+#include <vector>
+#include "Play.h"
 
 class GridManager
 {
 public:
+
+    enum class GridObject
+    {
+        kNone,
+        kSnake, 
+        kFruit,
+    };
 
     static GridManager& Instance()
     {
@@ -15,14 +23,16 @@ public:
 
     int16_t CalculateElementIndex(const int16_t x, const int16_t y);
 
-    void FillGridSquare(const int16_t x, const int16_t y);
+    void FillGridSquare(GridObject obj, const int16_t x, const int16_t y);
     
     void EmptyGridSquare(const int16_t x, const int16_t y);
 
     int16_t GetGridSize();
     
-    bool GetIsSquareOccupied(const int16_t index);
-    bool GetIsSquareOccupied(const int16_t x, const int16_t y);
+    GridObject GetIsSquareOccupied(const int16_t index);
+    GridObject GetIsSquareOccupied(const int16_t x, const int16_t y);
+
+    Point2D GetSquareCoordinates(const int16_t x, const int16_t y);
 
 private:
 
@@ -30,6 +40,6 @@ private:
 
     const static int m_gridSize = 16;
 
-    bool m_grid[m_gridSize * m_gridSize] = {false};
+    GridObject m_grid[m_gridSize * m_gridSize] = {GridObject::kNone};
 };
 
