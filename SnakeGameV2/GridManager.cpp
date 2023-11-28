@@ -35,10 +35,25 @@ GridManager::GridObject GridManager::GetIsSquareOccupied(const int16_t x, const 
     return m_grid[CalculateElementIndex(x, y)];
 }
 
+GridManager::GridObject GridManager::GetIsSquareOccupied(const Point2D pos)
+{
+    return m_grid[CalculateElementIndex(pos.x, pos.y)];
+}
+
 Point2D GridManager::GetSquareCoordinates(const int16_t x, const int16_t y)
 {
     float xPos = x * (DISPLAY_WIDTH / m_gridSize);
     float yPos = y * (DISPLAY_HEIGHT / m_gridSize);
 
     return Point2D(xPos, yPos);
+}
+
+bool GridManager::IsPosOutsideOfGrid(Point2D pos)
+{
+    if (pos.x < 0 || pos.x >= m_gridSize || pos.y < 0 || pos.y >= m_gridSize)
+    {
+        return true;
+    }
+
+    return false;
 }

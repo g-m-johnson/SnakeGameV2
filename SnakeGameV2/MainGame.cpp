@@ -13,6 +13,10 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 // Called by PlayBuffer every frame (60 times a second!)
 bool MainGameUpdate( float elapsedTime )
 {
+	float totalTime = 0.0f;
+
+
+
 	Play::ClearDrawingBuffer( Play::Colour(72, 63, 94) );
 	Play::DrawDebugText( { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 }, "SNAKES" );
 
