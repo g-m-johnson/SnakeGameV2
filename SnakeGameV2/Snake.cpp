@@ -4,6 +4,10 @@ Snake::Snake()
 {
 }
 
+void Snake::InitialiseSnake()
+{
+}
+
 void Snake::Update()
 {
 }

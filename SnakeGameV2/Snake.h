@@ -10,6 +10,8 @@ public:
 
 	Snake();
 
+	void InitialiseSnake();
+
 	void Update();
 
 	void IncrementLength();
