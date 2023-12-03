@@ -3,9 +3,14 @@
 
 
 
-int16_t GridManager::CalculateElementIndex(const int16_t x, const int16_t y)
+const int16_t GridManager::CalculateElementIndex(const int16_t x, const int16_t y) const
 {
     return ((y - 1) * m_gridSize) + x;
+}
+
+const int16_t GridManager::CalculateElementIndex(Point2D pos) const
+{
+    return ((pos.y - 1) * m_gridSize) + pos.x;
 }
 
 void GridManager::FillGridSquare(GridObject obj, const int16_t x, const int16_t y)
@@ -20,22 +25,22 @@ void GridManager::EmptyGridSquare(const int16_t x, const int16_t y)
     m_grid[index] = GridObject::kNone;
 }
 
-int16_t GridManager::GetGridSize()
+const int16_t GridManager::GetGridSize() const
 {
     return m_gridSize;
 }
 
-GridManager::GridObject GridManager::GetIsSquareOccupied(const int16_t index)
+const GridManager::GridObject GridManager::GetIsSquareOccupied(const int16_t index) const
 {
     return m_grid[index];
 }
 
-GridManager::GridObject GridManager::GetIsSquareOccupied(const int16_t x, const int16_t y)
+const GridManager::GridObject GridManager::GetIsSquareOccupied(const int16_t x, const int16_t y) const
 {
     return m_grid[CalculateElementIndex(x, y)];
 }
 
-GridManager::GridObject GridManager::GetIsSquareOccupied(const Point2D pos)
+const GridManager::GridObject GridManager::GetIsSquareOccupied(const Point2D pos) const
 {
     return m_grid[CalculateElementIndex(pos.x, pos.y)];
 }
@@ -56,4 +61,24 @@ bool GridManager::IsPosOutsideOfGrid(Point2D pos)
     }
 
     return false;
+}
+
+const Point2D GridManager::GetRandomEmptyGridSquare() const
+{
+    bool bIsSpaceOccupied = true;
+    int16_t x = 0;
+    int16_t y = 0;
+
+    while (bIsSpaceOccupied)
+    {
+        x = Play::RandomRoll(16);
+        y = Play::RandomRoll(16);
+
+        if (GetIsSquareOccupied(x, y) == GridObject::kNone)
+        {
+            bIsSpaceOccupied = false;
+        }
+    }
+
+    return Point2D(x, y);
 }

@@ -3,6 +3,9 @@
 
 Snake::Snake()
 {
+	int16_t size = GridManager::Instance().GetGridSize();
+	m_maxSnakeSize = size * size;
+	m_bodyPositions.reserve(m_maxSnakeSize);
 }
 
 void Snake::InitialiseSnake()
@@ -21,15 +24,15 @@ void Snake::Update()
 
 void Snake::IncrementLength()
 {
-	m_length++;
+	m_currentLength++;
 	m_bHasSnakeGrown = true;
 }
 
 void Snake::UpdatePositionsContainer(const Point2D newPos)
 {
-	for (int i = m_bodyPositions.size() - 1; i > 0 ; i--)
+	for (int i = m_currentLength - 1; i > 0 ; i--)
 	{
-		if ((i == m_bodyPositions.size() - 1) && m_bHasSnakeGrown)
+		if ((i == m_currentLength - 1) && m_bHasSnakeGrown)
 		{
 			m_bodyPositions.push_back(m_bodyPositions[i]);
 		}

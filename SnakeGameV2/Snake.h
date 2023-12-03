@@ -4,6 +4,8 @@
 #include <vector>
 #include "Play.h"
 
+class SnakeState;
+
 class Snake
 {
 public:
@@ -44,7 +46,7 @@ public:
 
 private:
 
-	int16_t m_length = 3;
+	int16_t m_currentLength = 3;
 
 	std::vector<Point2D> m_bodyPositions;
 
@@ -52,8 +54,12 @@ private:
 	
 	Point2D m_movementDirection = {1, 0};
 
+	int m_maxSnakeSize = 0;
+
 	bool m_bHasSnakeGrown = false;
 
 	Direction m_dir = Direction::kEast;
+
+	SnakeState* m_state;
 };
 

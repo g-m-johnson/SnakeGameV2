@@ -4,6 +4,8 @@
 #include "MainGame.h"
 #include "DrawingManager.h"
 
+GameState g_gameState;
+
 // The entry point for a PlayBuffer program
 void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 {
@@ -13,18 +15,21 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 // Called by PlayBuffer every frame (60 times a second!)
 bool MainGameUpdate( float elapsedTime )
 {
-	float totalTime = 0.0f;
+	g_gameState.m_totalTime += elapsedTime;
+	g_gameState.m_updateTimer += elapsedTime;
 
+	if (g_gameState.m_updateTimer > 0.2f)
+	{
+		Play::ClearDrawingBuffer( Play::Colour(72, 63, 94) );
+		Play::DrawDebugText( { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 }, "SNAKES" );
 
+		DrawingManager::Instance().ColourSquare(3, 3);
+		DrawingManager::Instance().ColourSquare(2, 2);
+		DrawingManager::Instance().ColourSquare(1, 1);
 
-	Play::ClearDrawingBuffer( Play::Colour(72, 63, 94) );
-	Play::DrawDebugText( { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 }, "SNAKES" );
+		Play::PresentDrawingBuffer();
+	}
 
-	DrawingManager::Instance().ColourSquare(3, 3);
-	DrawingManager::Instance().ColourSquare(2, 2);
-	DrawingManager::Instance().ColourSquare(1, 1);
-
-	Play::PresentDrawingBuffer();
 	return Play::KeyDown( VK_ESCAPE );
 }
 

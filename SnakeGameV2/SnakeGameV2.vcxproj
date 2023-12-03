@@ -197,6 +197,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="SnakeState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Play.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="GridManager.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Snake.h" />
+    <ClInclude Include="SnakeState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
